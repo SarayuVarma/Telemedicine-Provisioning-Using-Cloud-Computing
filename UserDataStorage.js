@@ -7,9 +7,9 @@ const PORT = process.env.PORT || 3000;
 
 // Configure AWS SDK with your credentials
 AWS.config.update({
-  region: 'your_dynamodb_region',
-  accessKeyId: 'your_access_key_id',
-  secretAccessKey: 'your_secret_access_key',
+  region: 'eu-north-1',
+  accessKeyId: 'AKIATM5LB5VV564UGBFA',
+  secretAccessKey: 'HJOJfSVQgyXrcPiS8hhUW8+Ls6+ewKGTQpGqfYYD',
 });
 
 // Create a DynamoDB DocumentClient
@@ -29,7 +29,9 @@ app.post('/signup', async (req, res) => {
       Item: req.body,
     };
     await dynamoDB.put(params).promise();
-    res.status(201).json({ message: 'User created successfully' });
+    
+    // Redirect to the login page after successful signup
+    res.redirect('/login'); // Adjust the URL if needed
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
